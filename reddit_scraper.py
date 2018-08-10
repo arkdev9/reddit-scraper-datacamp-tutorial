@@ -13,13 +13,19 @@ if __name__ == "__main__":
     while counter <= 100:
         for post in soup.find_all("div", attrs=attrs):
             title = post.find("p", class_="title").text
-            author = post.find("a", class_="author").text
-            likes = post.find("div", attrs={"class": "score unvoted"}).text
-            comments = post.find("a", class_="comments").text.split()[0]
-
             print(title)
+            forward_link = post.find("a", class_="title").attrs["href"]
+            print(forward_link)
+            
+            try:
+                author = post.find("a", class_="author").text
+            except:
+                author = "[deleted]"
+            
             print(author)
+            likes = post.find("div", attrs={"class": "score unvoted"}).text
             print(likes)
+            comments = post.find("a", class_="comments").text.split()[0]
             print(comments)
             print('=========================')
 
